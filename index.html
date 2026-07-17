@@ -229,7 +229,14 @@
   .icon-badge svg{width:24px; height:24px; stroke:var(--white); transform:rotate(-28deg);}
   .card h3{font-size:18px; font-weight:600;}
   .card p{font-size:14px; color:#5A6672; margin:0; flex-grow:1;}
+  .card .open.pending{color:#9AA4AE; cursor:default;}
+  .card .open.pending svg{opacity:0.35;}
+  .card:hover .open.pending svg{transform:none;}
+  a.pending{color:#6E8BA3 !important; cursor:default;}
+  a.pending:hover::after{width:0 !important;}
+
   .card .open{
+
     font-size:13.5px; font-weight:600; color:var(--navy);
     display:inline-flex; align-items:center; gap:6px;
   }
@@ -413,7 +420,7 @@
           <h3>School ERP</h3>
           <p>Admissions, attendance, timetables, exams and student records in one system.</p>
           <!-- TODO: replace # with your ERP GitHub Pages URL, e.g. https://friendsvidyanikethanschool-git.github.io/<repo-name>/ -->
-          <a href="#" class="open" target="_blank" rel="noopener">Open portal
+          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -426,7 +433,7 @@
           <h3>Digital Library</h3>
           <p>E-books, reference journals and past papers, searchable and available around the clock.</p>
           <!-- TODO: replace # with your Digital Library URL -->
-          <a href="#" class="open" target="_blank" rel="noopener">Open portal
+          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -439,7 +446,7 @@
           <h3>Learning Portal</h3>
           <p>Class assignments, study material and announcements from teachers.</p>
           <!-- TODO: replace # with your Learning Portal / LMS URL -->
-          <a href="#" class="open" target="_blank" rel="noopener">Open portal
+          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -454,7 +461,7 @@
           </div>
           <h3>Payroll</h3>
           <p>Salary slips, tax declarations and reimbursement claims for teaching and non-teaching staff.</p>
-          <a href="https://friendsvidyanikethanschool-git.github.io/Friends-School-Payroll/" class="open" target="_blank" rel="noopener">Open portal
+          <a href="https://friendsvidyanikethanschool-git.github.io/Friends-School-Payroll/" class="open">Open portal
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -466,7 +473,7 @@
           </div>
           <h3>Inventory</h3>
           <p>Track lab, sports and campus stock — stock levels, requests and issue records.</p>
-          <a href="https://friendsvidyanikethanschool-git.github.io/campus-stock/" class="open" target="_blank" rel="noopener">Open portal
+          <a href="https://friendsvidyanikethanschool-git.github.io/campus-stock/" class="open">Open portal
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -479,7 +486,7 @@
           <h3>Parent Portal</h3>
           <p>Fee payments, report cards and direct messages from your child's class teacher.</p>
           <!-- TODO: replace # with your Parent Portal URL -->
-          <a href="#" class="open" target="_blank" rel="noopener">Open portal
+          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -492,7 +499,7 @@
           <h3>Staff Webmail</h3>
           <p>Official school email for circulars, correspondence and inter-department notes.</p>
           <!-- TODO: replace # with your Staff Webmail URL -->
-          <a href="#" class="open" target="_blank" rel="noopener">Open portal
+          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -527,24 +534,11 @@
         <div>
           <p class="eyebrow dark">Notice board</p>
           <h2>Latest from the office</h2>
+          <p>Pulled from <code>notices.json</code> — add a notice there and it appears here, no page edits needed.</p>
         </div>
       </div>
-      <div class="notice-list">
-        <div class="notice-item">
-          <span class="date">Sample date</span>
-          <span class="title">Replace this row with your latest circular or announcement.</span>
-          <span class="pill">General</span>
-        </div>
-        <div class="notice-item">
-          <span class="date">Sample date</span>
-          <span class="title">Add exam schedules, holiday notices or fee due-dates here.</span>
-          <span class="pill">Academic</span>
-        </div>
-        <div class="notice-item">
-          <span class="date">Sample date</span>
-          <span class="title">This section is optional — delete it if you don't need a notice board.</span>
-          <span class="pill">Admin</span>
-        </div>
+      <div class="notice-list" id="noticeList">
+        <div class="notice-item"><span class="title">Loading notices…</span></div>
       </div>
     </div>
   </section>
@@ -560,7 +554,7 @@
           <img src="assets/logo.png" alt="">
           <strong>Friends Vidyanikethan<br>High School</strong>
         </div>
-        <p style="margin-top:18px; max-width:32ch; font-size:13.5px;">Maddikera, Kurnool,Andhra Pradesh-518385.</p>
+        <p style="margin-top:18px; max-width:32ch; font-size:13.5px;">Maddikera, Kurnool, Andhra Pradesh-518385.</p>
       </div>
       <div class="foot-col">
         <h4>Portals</h4>
@@ -572,13 +566,13 @@
         <h4>School</h4>
         <a href="#about">About us</a>
         <a href="#notices">Notice board</a>
-        <a href="#">Admissions</a>
+        <a href="javascript:void(0)" class="pending" aria-disabled="true" title="Not live yet">Admissions</a>
       </div>
       <div class="foot-col">
         <h4>Contact</h4>
-        <p>Near Zenda katta, Maddikera, 518385</p>
+        <p>Maddikera, Kurnool, AP , 518385</p>
         <p>+91 98660 95401</p>
-        <p>friendsvisyanikethanschool@gmail.com</p>
+        <p>friendsvidyanikethanschool@gmail.com</p>
       </div>
     </div>
     <div class="foot-bottom">
@@ -616,7 +610,32 @@
         card.classList.toggle('is-hidden', !show);
       });
     });
-  });
+  });  // Notice board — reads from notices.json so notices can be added
+  // by editing that file, without touching this page.
+  const noticeList = document.getElementById('noticeList');
+  const fallbackNotices = [
+    { date: "—", title: "Notices will appear here once notices.json is added to the repo.", tag: "Info" }
+  ];
+
+  function renderNotices(items) {
+    if (!items || items.length === 0) {
+      noticeList.innerHTML = '<div class="notice-item"><span class="title">No notices right now.</span></div>';
+      return;
+    }
+    const sorted = [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
+    noticeList.innerHTML = sorted.map(n => `
+      <div class="notice-item">
+        <span class="date">${n.date || ''}</span>
+        <span class="title">${n.title || ''}</span>
+        <span class="pill">${n.tag || 'General'}</span>
+      </div>
+    `).join('');
+  }
+
+  fetch('notices.json', { cache: 'no-store' })
+    .then(res => { if (!res.ok) throw new Error('not found'); return res.json(); })
+    .then(data => renderNotices(data))
+    .catch(() => renderNotices(fallbackNotices));
 </script>
 
 </body>
