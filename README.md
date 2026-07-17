@@ -5,11 +5,29 @@ Static homepage linking the school's ERP, Payroll, Inventory, Digital Library an
 ## Files
 
 ```
-index.html        The whole page (structure, styling and behaviour in one file)
-assets/logo.png    School logo, background removed
-.nojekyll          Tells GitHub Pages to skip Jekyll processing (leave this as is)
-CNAME.example      Notes for the custom domain step — see below
+index.html         The whole page (structure, styling and behaviour in one file)
+assets/logo.png     School logo, background removed
+notices.json        Notice board content — edit this, not the page, to post a notice
+PORTALS.md          Working notes on each portal's scope and access — fill in as you build
+.nojekyll            Tells GitHub Pages to skip Jekyll processing (leave this as is)
+CNAME.example        Notes for the custom domain step — see below
 ```
+
+## Posting a notice (no code required)
+
+Open `notices.json` on GitHub (click the file → pencil icon to edit) and add a block like:
+
+```json
+{
+  "date": "2026-08-01",
+  "title": "School reopens for Term 2 on 1 August.",
+  "tag": "General"
+}
+```
+
+Add a comma after the previous block, save/commit, and it appears on the homepage automatically — nothing in `index.html` needs to change. Notices are sorted newest-first by the `date` field automatically.
+
+If whoever posts notices shouldn't need a GitHub account at all, a Google Sheet published as JSON is a reasonable alternative — happy to wire that up instead if it'd suit your office staff better.
 
 ## 1. Put this on GitHub
 
