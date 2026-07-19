@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Admin — Friends Vidyanikethan High School</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#132330; --navy:#0D2338; --blue:#1C86C4; --blue-dim:#3D6E8C; --orange:#F1791E;
+    --paper:#F7F4EE; --paper-2:#EFEAE0; --line:#DDD6C8; --white:#FFFFFF;
+    --ok:#1F8A5A; --err:#C43D3D; --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',sans-serif; font-size:15px; line-height:1.5;
+  }
+  header{
+    background:var(--navy); color:var(--white); padding:20px 24px;
+    display:flex; align-items:center; gap:14px; position:sticky; top:0; z-index:10;
+  }
+  header img{height:36px; width:36px; object-fit:contain;}
+  header h1{font-size:16px; margin:0; font-weight:600;}
+  header span{font-family:'Space Mono',monospace; font-size:11px; color:#8FC6E8; display:block; margin-top:2px;}
+  header a.back{margin-left:auto; color:#C7D6E2; font-size:13px; text-decoration:none;}
+  .wrap{max-width:820px; margin:0 auto; padding:28px 20px 80px;}
+  .panel{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; margin-bottom:20px;
+  }
+  .panel h2{font-size:16px; margin:0 0 4px;}
+  .panel .hint{font-size:13px; color:#6B7784; margin:0 0 16px;}
+  label{display:block; font-size:12.5px; font-weight:600; color:var(--navy); margin-bottom:5px; margin-top:14px;}
+  label:first-of-type{margin-top:0;}
+  input[type=text], input[type=number], input[type=url], input[type=password], textarea{
+    width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:10px 12px;
+    border:1px solid var(--line); border-radius:8px; background:var(--paper); color:var(--ink);
+  }
+  input:focus, textarea:focus{outline:none; border-color:var(--blue);}
+  textarea{resize:vertical; min-height:70px;}
+  input[type=file]{ font-size:13px; margin-top:2px; }
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;}
+  button{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px;
+    padding:10px 18px; border-radius:100px; border:none; cursor:pointer;
+    background:var(--navy); color:var(--white); margin-top:16px;
+  }
+  button:hover{opacity:0.9;}
+  button.secondary{background:var(--paper-2); color:var(--navy); border:1px solid var(--line);}
+  button.small{padding:6px 14px; font-size:12.5px; margin-top:0;}
+  button.danger{background:#fbe9e9; color:var(--err); border:1px solid #f0c9c9;}
+  button:disabled{opacity:0.5; cursor:default;}
+  .status{
+    font-family:'Space Mono',monospace; font-size:12px; margin-top:10px;
+    padding:8px 12px; border-radius:8px; display:none;
+  }
+  .status.show{display:block;}
+  .status.ok{background:#e8f6ee; color:var(--ok);}
+  .status.err{background:#fbe9e9; color:var(--err);}
+  .locked{opacity:0.45; pointer-events:none;}
+  .notice-row, .download-row, .gallery-row{
+    display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--line);
+  }
+  .notice-row:last-child, .download-row:last-child, .gallery-row:last-child{border-bottom:none;}
+  .notice-row input{flex:1;}
+  .notice-row input.date-field{max-width:130px; flex:none;}
+  .notice-row input.tag-field{max-width:110px; flex:none;}
+  .download-row .label{ width:200px; flex-shrink:0; font-size:13.5px; font-weight:600; padding-top:9px; }
+  .download-row .file-status{ font-size:12px; color:#6B7784; margin-top:4px; }
+  .gallery-thumb{width:60px; height:45px; object-fit:cover; border-radius:6px; flex-shrink:0; border:1px solid var(--line);}
+  .conn-warning{
+    background:#FFF6E5; border:1px solid #F0DBA6; border-radius:10px; padding:14px 16px;
+    font-size:13px; color:#7A5B00; margin-bottom:18px;
+  }
+  .conn-warning a{color:#7A5B00;}
+  details.help{margin-top:14px; font-size:13px;}
+  details.help summary{cursor:pointer; color:var(--blue-dim); font-weight:600;}
+  details.help p{color:#4E5B66; margin:8px 0 0;}
+  .section-divider{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--blue-dim); margin:34px 0 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="../assets/logo.png" alt="">
+  <div>
+    <h1>Friends Vidyanikethan High School</h1>
+    <span>Site admin</span>
+  </div>
+  <a href="../index.html" class="back">← View site</a>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ CONNECT ============ -->
+  <div class="panel" id="connectPanel">
+    <h2>Connect to GitHub</h2>
+    <p class="hint">This page edits <code>content.json</code> and <code>notices.json</code> directly in your repository. Nothing here changes <code>index.html</code>.</p>
+    <div class="conn-warning">
+      You'll need a GitHub <strong>Personal Access Token</strong> with write access to this repository. It's stored only for this browser tab (cleared when you close it) — never saved, never sent anywhere except GitHub's API.
+      <details class="help">
+        <summary>How do I get a token?</summary>
+        <p>On GitHub: click your profile photo → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token. Set "Repository access" to this repo only, and under Permissions grant <strong>Contents: Read and write</strong>. Copy the token — GitHub only shows it once.</p>
+      </details>
+    </div>
+    <div class="row3">
+      <div>
+        <label for="ghOwner">Organization / owner</label>
+        <input type="text" id="ghOwner" placeholder="friendsvidyanikethanschool-git">
+      </div>
+      <div>
+        <label for="ghRepo">Repository name</label>
+        <input type="text" id="ghRepo" placeholder="school-home">
+      </div>
+      <div>
+        <label for="ghBranch">Branch</label>
+        <input type="text" id="ghBranch" placeholder="main" value="main">
+      </div>
+    </div>
+    <label for="ghToken">Personal access token</label>
+    <input type="password" id="ghToken" placeholder="ghp_...">
+    <button id="connectBtn">Connect &amp; load</button>
+    <div class="status" id="connectStatus"></div>
+  </div>
+
+  <div id="editors" class="locked">
+
+    <!-- ============ NOTICES ============ -->
+    <div class="panel">
+      <h2>Notice board</h2>
+      <p class="hint">Shown on the homepage, newest first.</p>
+      <div id="noticeRows"></div>
+      <button class="secondary small" id="addNoticeBtn" style="margin-top:14px;">+ Add notice</button>
+      <br>
+      <button id="saveNoticesBtn">Save notices</button>
+      <div class="status" id="noticesStatus"></div>
+    </div>
+
+    <!-- ============ PORTAL LINKS ============ -->
+    <div class="panel">
+      <h2>Portal links</h2>
+      <p class="hint">Leave blank to keep showing "Coming soon" on the homepage.</p>
+      <div class="row">
+        <div><label for="p-erp">School ERP</label><input type="url" id="p-erp"></div>
+        <div><label for="p-library">Digital Library</label><input type="url" id="p-library"></div>
+        <div><label for="p-learning">Learning Portal</label><input type="url" id="p-learning"></div>
+        <div><label for="p-payroll">Payroll</label><input type="url" id="p-payroll"></div>
+        <div><label for="p-inventory">Inventory</label><input type="url" id="p-inventory"></div>
+        <div><label for="p-parent">Parent Portal</label><input type="url" id="p-parent"></div>
+        <div><label for="p-webmail">Staff Webmail</label><input type="url" id="p-webmail"></div>
+      </div>
+      <button id="savePortalsBtn">Save portal links</button>
+      <div class="status" id="portalsStatus"></div>
+    </div>
+
+    <!-- ============ STATISTICS ============ -->
+    <div class="panel">
+      <h2>Statistics</h2>
+      <p class="hint">Shown as animated counters on the homepage.</p>
+      <div class="row">
+        <div><label for="s-years">Years of excellence</label><input type="number" id="s-years"></div>
+        <div><label for="s-students">Students</label><input type="number" id="s-students"></div>
+        <div><label for="s-teachers">Teachers</label><input type="number" id="s-teachers"></div>
+        <div><label for="s-books">Library books</label><input type="number" id="s-books"></div>
+      </div>
+      <button id="saveStatsBtn">Save statistics</button>
+      <div class="status" id="statsStatus"></div>
+    </div>
+
+    <!-- ============ PRINCIPAL ============ -->
+    <div class="panel">
+      <h2>Principal's message</h2>
+      <label for="pr-name">Principal's name</label>
+      <input type="text" id="pr-name">
+      <label for="pr-message">Message</label>
+      <textarea id="pr-message" rows="4"></textarea>
+      <label for="pr-photo">Photo</label>
+      <input type="file" id="pr-photo" accept="image/*">
+      <div class="file-status" id="pr-photo-status"></div>
+      <button id="savePrincipalBtn">Save principal section</button>
+      <div class="status" id="principalStatus"></div>
+    </div>
+
+    <!-- ============ ADMISSIONS ============ -->
+    <div class="panel">
+      <h2>Admissions buttons</h2>
+      <p class="hint">These control the three buttons in the Admissions section.</p>
+      <label for="a-enquiry">Admission Enquiry — link (form, WhatsApp, or mailto)</label>
+      <input type="url" id="a-enquiry" placeholder="https://wa.me/91... or mailto:...">
+      <label for="a-form">Download Admission Form — upload the PDF</label>
+      <input type="file" id="a-form" accept="application/pdf">
+      <div class="file-status" id="a-form-status"></div>
+      <label for="a-apply">Apply Online — link</label>
+      <input type="url" id="a-apply">
+      <button id="saveAdmissionsBtn">Save admissions section</button>
+      <div class="status" id="admissionsStatus"></div>
+    </div>
+
+    <!-- ============ DOWNLOADS ============ -->
+    <div class="panel">
+      <h2>Downloads</h2>
+      <p class="hint">Upload a file for each — it replaces the "Download" link on the homepage.</p>
+      <div id="downloadRows"></div>
+      <div class="status" id="downloadsStatus"></div>
+    </div>
+
+    <!-- ============ GALLERY ============ -->
+    <div class="panel">
+      <h2>Gallery</h2>
+      <p class="hint">Add photos here — they replace the placeholder tiles on the homepage.</p>
+      <div id="galleryRows"></div>
+      <div class="section-divider">Add a photo</div>
+      <label for="g-file">Photo</label>
+      <input type="file" id="g-file" accept="image/*">
+      <label for="g-caption">Caption (for accessibility)</label>
+      <input type="text" id="g-caption" placeholder="e.g. Annual sports day, 2026">
+      <button id="addGalleryBtn">Upload &amp; add to gallery</button>
+      <div class="status" id="galleryStatus"></div>
+    </div>
+
+    <!-- ============ ACHIEVEMENTS ============ -->
+    <div class="panel">
+      <h2>Achievements</h2>
+      <label for="ac-excellence">Academic Excellence</label>
+      <textarea id="ac-excellence" rows="2"></textarea>
+      <label for="ac-sports">Sports</label>
+      <textarea id="ac-sports" rows="2"></textarea>
+      <label for="ac-olympiads">Olympiads</label>
+      <textarea id="ac-olympiads" rows="2"></textarea>
+      <label for="ac-competitions">Competitions</label>
+      <textarea id="ac-competitions" rows="2"></textarea>
+      <label for="ac-sciencefair">Science Fair</label>
+      <textarea id="ac-sciencefair" rows="2"></textarea>
+      <button id="saveAchievementsBtn">Save achievements</button>
+      <div class="status" id="achievementsStatus"></div>
+    </div>
+
+    <!-- ============ CONTACT ============ -->
+    <div class="panel">
+      <h2>Contact</h2>
+      <label for="c-hours">Office hours</label>
+      <input type="text" id="c-hours" placeholder="e.g. 9:00 AM – 4:00 PM, Monday to Saturday">
+      <p class="hint" style="margin-top:10px;">Address, phone, email and the map are fixed in the page itself — tell your developer if those ever need to change.</p>
+      <button id="saveContactBtn">Save contact info</button>
+      <div class="status" id="contactStatus"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // -----------------------------------------------------------------
+  // GitHub API helpers
+  // -----------------------------------------------------------------
+  let conn = { owner: '', repo: '', branch: 'main', token: '' };
+
+  function apiUrl(path) {
+    return `https://api.github.com/repos/${conn.owner}/${conn.repo}/contents/${path}`;
+  }
+
+  function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+      (match, p1) => String.fromCharCode('0x' + p1)));
+  }
+  function b64DecodeUnicode(str) {
+    return decodeURIComponent(atob(str).split('').map(c =>
+      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+  }
+  function arrayBufferToBase64(buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+  }
+
+  async function ghGetJSON(path, fallback) {
+    const res = await fetch(apiUrl(path) + `?ref=${conn.branch}`, {
+      headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (res.status === 404) return { data: fallback, sha: null };
+    if (!res.ok) throw new Error(`GitHub error ${res.status} reading ${path}`);
+    const file = await res.json();
+    const text = b64DecodeUnicode(file.content.replace(/\n/g, ''));
+    return { data: JSON.parse(text), sha: file.sha };
+  }
+
+  async function ghPutJSON(path, dataObj, sha, message) {
+    const content = b64EncodeUnicode(JSON.stringify(dataObj, null, 2));
+    const body = { message, content, branch: conn.branch };
+    if (sha) body.sha = sha;
+    const res = await fetch(apiUrl(path), {
+      method: 'PUT',
+      headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.message || `GitHub error ${res.status}`); }
+    return res.json();
+  }
+
+  async function ghPutBinary(path, file, message) {
+    const buffer = await file.arrayBuffer();
+    const content = arrayBufferToBase64(buffer);
+    // Check if file already exists to get its sha (needed to overwrite)
+    let sha = null;
+    const existing = await fetch(apiUrl(path) + `?ref=${conn.branch}`, {
+      headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (existing.ok) { const j = await existing.json(); sha = j.sha; }
+    const body = { message, content, branch: conn.branch };
+    if (sha) body.sha = sha;
+    const res = await fetch(apiUrl(path), {
+      method: 'PUT',
+      headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.message || `GitHub error ${res.status}`); }
+    return path;
+  }
+
+  function slugifyFilename(name) {
+    return name.toLowerCase().replace(/[^a-z0-9.]+/g, '-').replace(/-+/g, '-');
+  }
+
+  function showStatus(id, ok, message) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.className = 'status show ' + (ok ? 'ok' : 'err');
+  }
+
+  async function readContentJson() {
+    return ghGetJSON('content.json', {
+      portals: {}, stats: {}, principal: {}, admissions: {}, contact: {}, downloads: {}, gallery: [], achievements: {}
+    });
+  }
+
+  async function saveContentSection(sectionKey, sectionData, statusId, label) {
+    try {
+      const { data, sha } = await readContentJson();
+      data[sectionKey] = Object.assign({}, data[sectionKey] || {}, sectionData);
+      await ghPutJSON('content.json', data, sha, `Update ${label} via admin page`);
+      showStatus(statusId, true, 'Saved. Live in a minute or two once GitHub Pages rebuilds.');
+    } catch (e) {
+      showStatus(statusId, false, 'Error: ' + e.message);
+    }
+  }
+
+  // -----------------------------------------------------------------
+  // Connect
+  // -----------------------------------------------------------------
+  const savedConn = JSON.parse(localStorage.getItem('fvhs-admin-conn') || '{}');
+  if (savedConn.owner) document.getElementById('ghOwner').value = savedConn.owner;
+  if (savedConn.repo) document.getElementById('ghRepo').value = savedConn.repo;
+  if (savedConn.branch) document.getElementById('ghBranch').value = savedConn.branch;
+
+  document.getElementById('connectBtn').addEventListener('click', async () => {
+    conn.owner = document.getElementById('ghOwner').value.trim();
+    conn.repo = document.getElementById('ghRepo').value.trim();
+    conn.branch = document.getElementById('ghBranch').value.trim() || 'main';
+    conn.token = document.getElementById('ghToken').value.trim();
+    if (!conn.owner || !conn.repo || !conn.token) {
+      showStatus('connectStatus', false, 'Owner, repo and token are all required.');
+      return;
+    }
+    localStorage.setItem('fvhs-admin-conn', JSON.stringify({ owner: conn.owner, repo: conn.repo, branch: conn.branch }));
+    try {
+      await loadAll();
+      document.getElementById('editors').classList.remove('locked');
+      showStatus('connectStatus', true, 'Connected — loaded current content below.');
+    } catch (e) {
+      showStatus('connectStatus', false, 'Could not connect: ' + e.message);
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Load everything into the forms
+  // -----------------------------------------------------------------
+  let noticesCache = [];
+
+  async function loadAll() {
+    const { data: content } = await readContentJson();
+
+    // Portals
+    ['erp','library','learning','payroll','inventory','parent','webmail'].forEach(k => {
+      document.getElementById('p-' + k).value = (content.portals && content.portals[k]) || '';
+    });
+    // Stats
+    ['years','students','teachers','books'].forEach(k => {
+      document.getElementById('s-' + k).value = (content.stats && content.stats[k]) || 0;
+    });
+    // Principal
+    document.getElementById('pr-name').value = (content.principal && content.principal.name) || '';
+    document.getElementById('pr-message').value = (content.principal && content.principal.message) || '';
+    document.getElementById('pr-photo-status').textContent = (content.principal && content.principal.photo) ? ('Current: ' + content.principal.photo) : 'No photo uploaded yet.';
+    // Admissions
+    document.getElementById('a-enquiry').value = (content.admissions && content.admissions.enquiryUrl) || '';
+    document.getElementById('a-apply').value = (content.admissions && content.admissions.applyUrl) || '';
+    document.getElementById('a-form-status').textContent = (content.admissions && content.admissions.formUrl) ? ('Current: ' + content.admissions.formUrl) : 'No file uploaded yet.';
+    // Contact
+    document.getElementById('c-hours').value = (content.contact && content.contact.officeHours) || '';
+    // Achievements
+    ['excellence','sports','olympiads','competitions','sciencefair'].forEach(k => {
+      document.getElementById('ac-' + k).value = (content.achievements && content.achievements[k]) || '';
+    });
+
+    renderDownloadRows(content.downloads || {});
+    renderGalleryRows(content.gallery || []);
+
+    const { data: notices } = await ghGetJSON('notices.json', []);
+    noticesCache = Array.isArray(notices) ? notices : [];
+    renderNoticeRows();
+  }
+
+  // -----------------------------------------------------------------
+  // Notices
+  // -----------------------------------------------------------------
+  function renderNoticeRows() {
+    const box = document.getElementById('noticeRows');
+    box.innerHTML = '';
+    noticesCache.forEach((n, i) => {
+      const row = document.createElement('div');
+      row.className = 'notice-row';
+      row.innerHTML = `
+        <input type="text" class="date-field" placeholder="YYYY-MM-DD" value="${n.date || ''}" data-i="${i}" data-f="date">
+        <input type="text" placeholder="Notice text" value="${(n.title || '').replace(/"/g,'&quot;')}" data-i="${i}" data-f="title">
+        <input type="text" class="tag-field" placeholder="Tag" value="${n.tag || ''}" data-i="${i}" data-f="tag">
+        <button class="danger small" data-remove="${i}">Remove</button>
+      `;
+      box.appendChild(row);
+    });
+    box.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        noticesCache[inp.dataset.i][inp.dataset.f] = inp.value;
+      });
+    });
+    box.querySelectorAll('[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        noticesCache.splice(parseInt(btn.dataset.remove, 10), 1);
+        renderNoticeRows();
+      });
+    });
+  }
+  document.getElementById('addNoticeBtn').addEventListener('click', () => {
+    noticesCache.push({ date: new Date().toISOString().slice(0,10), title: '', tag: 'General' });
+    renderNoticeRows();
+  });
+  document.getElementById('saveNoticesBtn').addEventListener('click', async () => {
+    try {
+      const { sha } = await ghGetJSON('notices.json', []);
+      const content = b64EncodeUnicode(JSON.stringify(noticesCache, null, 2));
+      const body = { message: 'Update notices via admin page', content, branch: conn.branch };
+      if (sha) body.sha = sha;
+      const res = await fetch(apiUrl('notices.json'), {
+        method: 'PUT',
+        headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.message || `GitHub error ${res.status}`); }
+      showStatus('noticesStatus', true, 'Saved. Live in a minute or two once GitHub Pages rebuilds.');
+    } catch (e) {
+      showStatus('noticesStatus', false, 'Error: ' + e.message);
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Portals
+  // -----------------------------------------------------------------
+  document.getElementById('savePortalsBtn').addEventListener('click', async () => {
+    const section = {};
+    ['erp','library','learning','payroll','inventory','parent','webmail'].forEach(k => {
+      section[k] = document.getElementById('p-' + k).value.trim();
+    });
+    await saveContentSection('portals', section, 'portalsStatus', 'portal links');
+  });
+
+  // -----------------------------------------------------------------
+  // Statistics
+  // -----------------------------------------------------------------
+  document.getElementById('saveStatsBtn').addEventListener('click', async () => {
+    const section = {};
+    ['years','students','teachers','books'].forEach(k => {
+      section[k] = parseInt(document.getElementById('s-' + k).value, 10) || 0;
+    });
+    await saveContentSection('stats', section, 'statsStatus', 'statistics');
+  });
+
+  // -----------------------------------------------------------------
+  // Principal
+  // -----------------------------------------------------------------
+  document.getElementById('savePrincipalBtn').addEventListener('click', async () => {
+    try {
+      const section = {
+        name: document.getElementById('pr-name').value.trim(),
+        message: document.getElementById('pr-message').value.trim()
+      };
+      const fileInput = document.getElementById('pr-photo');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const path = 'assets/principal-' + slugifyFilename(file.name);
+        await ghPutBinary(path, file, 'Upload principal photo via admin page');
+        section.photo = path;
+        document.getElementById('pr-photo-status').textContent = 'Current: ' + path;
+      }
+      await saveContentSection('principal', section, 'principalStatus', 'principal section');
+    } catch (e) {
+      showStatus('principalStatus', false, 'Error: ' + e.message);
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Admissions
+  // -----------------------------------------------------------------
+  document.getElementById('saveAdmissionsBtn').addEventListener('click', async () => {
+    try {
+      const section = {
+        enquiryUrl: document.getElementById('a-enquiry').value.trim(),
+        applyUrl: document.getElementById('a-apply').value.trim()
+      };
+      const fileInput = document.getElementById('a-form');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const path = 'assets/downloads/admission-form-' + slugifyFilename(file.name);
+        await ghPutBinary(path, file, 'Upload admission form via admin page');
+        section.formUrl = path;
+        document.getElementById('a-form-status').textContent = 'Current: ' + path;
+      }
+      await saveContentSection('admissions', section, 'admissionsStatus', 'admissions section');
+    } catch (e) {
+      showStatus('admissionsStatus', false, 'Error: ' + e.message);
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Downloads
+  // -----------------------------------------------------------------
+  const downloadLabels = {
+    'admission-form': 'Admission Form',
+    'holiday-list': 'Holiday List',
+    'academic-calendar': 'Academic Calendar',
+    'book-list': 'Book List',
+    'uniform-guidelines': 'Uniform Guidelines',
+    'transfer-certificate': 'Transfer Certificate Request'
+  };
+  function renderDownloadRows(downloads) {
+    const box = document.getElementById('downloadRows');
+    box.innerHTML = '';
+    Object.entries(downloadLabels).forEach(([key, label]) => {
+      const row = document.createElement('div');
+      row.className = 'download-row';
+      const current = downloads[key];
+      row.innerHTML = `
+        <div class="label">${label}</div>
+        <div style="flex:1;">
+          <input type="file" data-key="${key}">
+          <div class="file-status">${current ? 'Current: ' + current : 'No file uploaded yet.'}</div>
+        </div>
+        <button class="secondary small" data-upload="${key}">Upload &amp; save</button>
+      `;
+      box.appendChild(row);
+    });
+    box.querySelectorAll('[data-upload]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const key = btn.dataset.upload;
+        const input = box.querySelector(`input[data-key="${key}"]`);
+        if (!input.files.length) { showStatus('downloadsStatus', false, 'Choose a file first.'); return; }
+        try {
+          const file = input.files[0];
+          const path = 'assets/downloads/' + key + '-' + slugifyFilename(file.name);
+          await ghPutBinary(path, file, `Upload ${downloadLabels[key]} via admin page`);
+          await saveContentSection('downloads', { [key]: path }, 'downloadsStatus', downloadLabels[key]);
+          const { data } = await readContentJson();
+          renderDownloadRows(data.downloads || {});
+        } catch (e) {
+          showStatus('downloadsStatus', false, 'Error: ' + e.message);
+        }
+      });
+    });
+  }
+
+  // -----------------------------------------------------------------
+  // Gallery
+  // -----------------------------------------------------------------
+  function renderGalleryRows(gallery) {
+    const box = document.getElementById('galleryRows');
+    box.innerHTML = '';
+    if (gallery.length === 0) {
+      box.innerHTML = '<p class="hint">No photos added yet — the homepage is showing placeholder tiles.</p>';
+      return;
+    }
+    gallery.forEach((g, i) => {
+      const row = document.createElement('div');
+      row.className = 'gallery-row';
+      row.innerHTML = `
+        <img class="gallery-thumb" src="../${g.src}" alt="">
+        <div style="flex:1; font-size:13.5px;">${g.alt || '(no caption)'}<div class="file-status">${g.src}</div></div>
+        <button class="danger small" data-remove-gallery="${i}">Remove</button>
+      `;
+      box.appendChild(row);
+    });
+    box.querySelectorAll('[data-remove-gallery]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          const { data, sha } = await readContentJson();
+          data.gallery.splice(parseInt(btn.dataset.removeGallery, 10), 1);
+          await ghPutJSON('content.json', data, sha, 'Remove gallery photo via admin page');
+          renderGalleryRows(data.gallery);
+          showStatus('galleryStatus', true, 'Removed.');
+        } catch (e) {
+          showStatus('galleryStatus', false, 'Error: ' + e.message);
+        }
+      });
+    });
+  }
+  document.getElementById('addGalleryBtn').addEventListener('click', async () => {
+    const fileInput = document.getElementById('g-file');
+    const caption = document.getElementById('g-caption').value.trim();
+    if (!fileInput.files.length) { showStatus('galleryStatus', false, 'Choose a photo first.'); return; }
+    try {
+      const file = fileInput.files[0];
+      const path = 'assets/gallery/' + Date.now() + '-' + slugifyFilename(file.name);
+      await ghPutBinary(path, file, 'Add gallery photo via admin page');
+      const { data, sha } = await readContentJson();
+      data.gallery = data.gallery || [];
+      data.gallery.push({ src: path, alt: caption });
+      await ghPutJSON('content.json', data, sha, 'Add gallery photo via admin page');
+      renderGalleryRows(data.gallery);
+      document.getElementById('g-caption').value = '';
+      fileInput.value = '';
+      showStatus('galleryStatus', true, 'Added. Live in a minute or two once GitHub Pages rebuilds.');
+    } catch (e) {
+      showStatus('galleryStatus', false, 'Error: ' + e.message);
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Achievements
+  // -----------------------------------------------------------------
+  document.getElementById('saveAchievementsBtn').addEventListener('click', async () => {
+    const section = {};
+    ['excellence','sports','olympiads','competitions','sciencefair'].forEach(k => {
+      section[k] = document.getElementById('ac-' + k).value.trim();
+    });
+    await saveContentSection('achievements', section, 'achievementsStatus', 'achievements');
+  });
+
+  // -----------------------------------------------------------------
+  // Contact
+  // -----------------------------------------------------------------
+  document.getElementById('saveContactBtn').addEventListener('click', async () => {
+    const section = { officeHours: document.getElementById('c-hours').value.trim() };
+    await saveContentSection('contact', section, 'contactStatus', 'contact info');
+  });
+</script>
+
+</body>
+</html>
