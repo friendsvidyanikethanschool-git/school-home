@@ -572,7 +572,7 @@
   <section class="section-alt" id="principal">
     <div class="wrap split reverse">
       <div class="split-media">
-        <div class="portrait-frame">
+        <div class="portrait-frame" id="principalPhotoFrame">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
           <span>Principal's photo<br>— add to assets/</span>
         </div>
@@ -580,11 +580,11 @@
       <div class="split-copy">
         <p class="eyebrow dark">Principal's message</p>
         <h2>A word from our Principal</h2>
-        <blockquote class="principal-msg">
+        <blockquote class="principal-msg" id="principalMessage">
           "Every child who walks through our gates carries their own promise. Our task is simply to give that promise room to grow — through patient teaching, a caring campus, and the belief that discipline and warmth can sit side by side. Thank you for trusting us with your child's education."
         </blockquote>
-        <p style="font-size:14px; color:#8A93A0;">— Principal, Friends Vidyanikethan High School <em>(name to be added)</em></p>
-        <div class="signature">Principal's signature — to be added</div>
+        <p style="font-size:14px; color:#8A93A0;">— Principal, Friends Vidyanikethan High School <em id="principalName">(name to be added)</em></p>
+        <div class="signature" id="principalSignature">Principal's signature — to be added</div>
       </div>
     </div>
   </section>
@@ -660,7 +660,7 @@
       <div class="academics-grid">
         <div class="item">
           <h4>Curriculum</h4>
-          <p>Structured, age-appropriate curriculum across all classes offered. <em>(State Board.)</em></p>
+          <p>Structured, age-appropriate curriculum across all classes offered. <em>(Board affiliation to be added.)</em></p>
         </div>
         <div class="item">
           <h4>Teaching Methodology</h4>
@@ -676,7 +676,7 @@
         </div>
         <div class="item">
           <h4>School Timings</h4>
-          <p><em>9:00 AM – 5:00 PM, Monday to Saturday.</em></p>
+          <p><em>School hours to be added — e.g. 9:00 AM – 4:00 PM, Monday to Saturday.</em></p>
         </div>
         <div class="item">
           <h4>Classes Offered</h4>
@@ -740,9 +740,9 @@
             <li>Address proof</li>
           </ul>
           <div class="cta-row">
-            <a href="javascript:void(0)" class="btn btn-primary pending" aria-disabled="true" title="Wire this to your enquiry form or phone/WhatsApp link">Admission Enquiry</a>
-            <a href="javascript:void(0)" class="btn btn-outline pending" aria-disabled="true" title="Add the PDF to assets/downloads/ and link it here">Download Admission Form</a>
-            <a href="javascript:void(0)" class="btn btn-outline pending" aria-disabled="true" title="Wire this to your online admission system once ready">Apply Online</a>
+            <a href="javascript:void(0)" class="btn btn-primary pending" id="admEnquiryBtn" aria-disabled="true" title="Wire this to your enquiry form or phone/WhatsApp link">Admission Enquiry</a>
+            <a href="javascript:void(0)" class="btn btn-outline pending" id="admFormBtn" aria-disabled="true" title="Add the PDF to assets/downloads/ and link it here">Download Admission Form</a>
+            <a href="javascript:void(0)" class="btn btn-outline pending" id="admApplyBtn" aria-disabled="true" title="Wire this to your online admission system once ready">Apply Online</a>
           </div>
         </div>
       </div>
@@ -782,8 +782,8 @@
           <p>Placeholder tiles — replace with real photos in <code>assets/gallery/</code> as they become available.</p>
         </div>
       </div>
-      <div class="gallery-grid">
-        <!-- TODO: replace each tile below with an actual <img src="assets/gallery/xxx.jpg" alt="..." loading="lazy"> -->
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Populated from content.json → gallery. These placeholder tiles show until real photos are added via the admin page. -->
         <div class="gallery-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 16-5-4-5 4-3-2-5 4"/></svg><span>Campus photo</span></div>
         <div class="gallery-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 16-5-4-5 4-3-2-5 4"/></svg><span>Classroom photo</span></div>
         <div class="gallery-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 16-5-4-5 4-3-2-5 4"/></svg><span>Sports day photo</span></div>
@@ -804,12 +804,12 @@
           <p>Add real results, names and years as they're confirmed — placeholders below.</p>
         </div>
       </div>
-      <div class="grid cols-4">
-        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M5 4H3v2a4 4 0 0 0 4 4M19 4h2v2a4 4 0 0 1-4 4"/></svg></div><h3>Academic Excellence</h3><p>Top performers each year — details to be added.</p></div>
-        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div><h3>Sports</h3><p>Inter-school sports results — details to be added.</p></div>
-        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>Olympiads</h3><p>Olympiad participation and results — details to be added.</p></div>
-        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Competitions</h3><p>Debates, quizzes and cultural events — details to be added.</p></div>
-        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L15 8V3"/><path d="M9 3h6M8.5 14h7"/></svg></div><h3>Science Fair</h3><p>Student projects and exhibitions — details to be added.</p></div>
+      <div class="grid cols-4" id="achievementsGrid">
+        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M5 4H3v2a4 4 0 0 0 4 4M19 4h2v2a4 4 0 0 1-4 4"/></svg></div><h3>Academic Excellence</h3><p data-achv="excellence">Top performers each year — details to be added.</p></div>
+        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div><h3>Sports</h3><p data-achv="sports">Inter-school sports results — details to be added.</p></div>
+        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>Olympiads</h3><p data-achv="olympiads">Olympiad participation and results — details to be added.</p></div>
+        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Competitions</h3><p data-achv="competitions">Debates, quizzes and cultural events — details to be added.</p></div>
+        <div class="card"><div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L15 8V3"/><path d="M9 3h6M8.5 14h7"/></svg></div><h3>Science Fair</h3><p data-achv="sciencefair">Student projects and exhibitions — details to be added.</p></div>
       </div>
     </div>
   </section>
@@ -817,12 +817,12 @@
   <!-- ============ STATISTICS ============ -->
   <section class="stats-strip" id="statistics" aria-label="School statistics">
     <div class="wrap">
-      <div class="stats-row">
-        <!-- data-target values are placeholders — set the real numbers here -->
-        <div class="stat-counter"><b data-target="0" data-suffix="+">0</b><span>Years of Excellence</span></div>
-        <div class="stat-counter"><b data-target="0" data-suffix="+">0</b><span>Students</span></div>
-        <div class="stat-counter"><b data-target="0" data-suffix="+">0</b><span>Teachers</span></div>
-        <div class="stat-counter"><b data-target="0" data-suffix="+">0</b><span>Library Books</span></div>
+      <div class="stats-row" id="statsRow">
+        <!-- Values controlled by content.json → stats. Defaults below are placeholders. -->
+        <div class="stat-counter"><b data-stat="years" data-target="0" data-suffix="+">0</b><span>Years of Excellence</span></div>
+        <div class="stat-counter"><b data-stat="students" data-target="0" data-suffix="+">0</b><span>Students</span></div>
+        <div class="stat-counter"><b data-stat="teachers" data-target="0" data-suffix="+">0</b><span>Teachers</span></div>
+        <div class="stat-counter"><b data-stat="books" data-target="0" data-suffix="+">0</b><span>Library Books</span></div>
       </div>
     </div>
   </section>
@@ -871,8 +871,8 @@
           </div>
           <h3>School ERP</h3>
           <p>Admissions, attendance, timetables, exams and student records in one system.</p>
-          <!-- TODO: replace # with your ERP GitHub Pages URL, e.g. https://friendsvidyanikethanschool-git.github.io/<repo-name>/ -->
-          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
+          <!-- Link controlled by content.json → portals.erp. Editing this file directly is no longer necessary. -->
+          <a href="javascript:void(0)" class="open pending" data-portal="erp" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -884,8 +884,8 @@
           </div>
           <h3>Digital Library</h3>
           <p>E-books, reference journals and past papers, searchable and available around the clock.</p>
-          <!-- TODO: replace # with your Digital Library URL -->
-          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
+          <!-- Link controlled by content.json → portals.library -->
+          <a href="javascript:void(0)" class="open pending" data-portal="library" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -897,8 +897,8 @@
           </div>
           <h3>Learning Portal</h3>
           <p>Class assignments, study material and announcements from teachers.</p>
-          <!-- TODO: replace # with your Learning Portal / LMS URL -->
-          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
+          <!-- Link controlled by content.json → portals.learning -->
+          <a href="javascript:void(0)" class="open pending" data-portal="learning" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -913,7 +913,7 @@
           </div>
           <h3>Payroll</h3>
           <p>Salary slips, tax declarations and reimbursement claims for teaching and non-teaching staff.</p>
-          <a href="https://friendsvidyanikethanschool-git.github.io/Friends-School-Payroll/" class="open">Open portal
+          <a href="https://friendsvidyanikethanschool-git.github.io/Friends-School-Payroll/" class="open" data-portal="payroll">Open portal
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -925,7 +925,7 @@
           </div>
           <h3>Inventory</h3>
           <p>Track lab, sports and campus stock — stock levels, requests and issue records.</p>
-          <a href="https://friendsvidyanikethanschool-git.github.io/campus-stock/" class="open">Open portal
+          <a href="https://friendsvidyanikethanschool-git.github.io/campus-stock/" class="open" data-portal="inventory">Open portal
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -937,8 +937,8 @@
           </div>
           <h3>Parent Portal</h3>
           <p>Fee payments, report cards and direct messages from your child's class teacher.</p>
-          <!-- TODO: replace # with your Parent Portal URL -->
-          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
+          <!-- Link controlled by content.json → portals.parent -->
+          <a href="javascript:void(0)" class="open pending" data-portal="parent" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -950,8 +950,8 @@
           </div>
           <h3>Staff Webmail</h3>
           <p>Official school email for circulars, correspondence and inter-department notes.</p>
-          <!-- TODO: replace # with your Staff Webmail URL -->
-          <a href="javascript:void(0)" class="open pending" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
+          <!-- Link controlled by content.json → portals.webmail -->
+          <a href="javascript:void(0)" class="open pending" data-portal="webmail" aria-disabled="true" title="Not live yet — link will be added once this system is ready">Coming soon
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -1009,31 +1009,31 @@
           <p>Upload each file to <code>assets/downloads/</code> and update the link to make it live.</p>
         </div>
       </div>
-      <div class="download-list">
-        <!-- TODO: for each item, set href to assets/downloads/<file>.pdf and remove the pending class -->
+      <div class="download-list" id="downloadList">
+        <!-- Links controlled by content.json → downloads (matched by data-download key) -->
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Admission Form</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="admission-form" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg> Holiday List</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="holiday-list" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg> Academic Calendar</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="academic-calendar" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M8 7h8M8 11h8"/></svg> Book List</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="book-list" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.4 14.5 16 10l-4 4-6.5-6.5"/><path d="M20.4 14.5V21H4V3h9"/></svg> Uniform Guidelines</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="uniform-guidelines" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
         <div class="download-item">
           <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg> Transfer Certificate Request</span>
-          <a href="javascript:void(0)" class="dl pending" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
+          <a href="javascript:void(0)" class="dl pending" data-download="transfer-certificate" aria-disabled="true" title="Add the file to assets/downloads/">Download</a>
         </div>
       </div>
     </div>
@@ -1099,7 +1099,7 @@
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-              <span>Office hours — <em>to be added</em></span>
+              <span>Office hours — <em id="officeHours">to be added</em></span>
             </li>
           </ul>
           <div class="cta-row">
@@ -1212,12 +1212,11 @@
   });
 
   // Notice board — reads from notices.json so notices can be added
-  // by editing that file, without touching this page.
+  // via the admin page (or by editing that file), without touching this page.
   const noticeList = document.getElementById('noticeList');
   const fallbackNotices = [
     { date: "—", title: "Notices will appear here once notices.json is added to the repo.", tag: "Info" }
   ];
-
   function renderNotices(items) {
     if (!items || items.length === 0) {
       noticeList.innerHTML = '<div class="notice-item"><span class="title">No notices right now.</span></div>';
@@ -1232,33 +1231,143 @@
       </div>
     `).join('');
   }
-
   fetch('notices.json', { cache: 'no-store' })
     .then(res => { if (!res.ok) throw new Error('not found'); return res.json(); })
     .then(data => renderNotices(data))
     .catch(() => renderNotices(fallbackNotices));
 
-  // Animated stat counters — runs once each counter scrolls into view.
-  // Edit data-target on each <b> in #statistics to set the real number.
-  const counters = document.querySelectorAll('.stat-counter b');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = parseInt(el.dataset.target, 10) || 0;
-      const suffix = el.dataset.suffix || '';
-      const duration = 1200;
-      const start = performance.now();
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        el.textContent = Math.round(progress * target) + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
+  // ---------------------------------------------------------------------
+  // content.json — everything below reads this one file so the rest of
+  // the page (portal links, stats, principal message, admissions buttons,
+  // downloads, gallery, achievements, office hours) can be edited from
+  // the admin page instead of this HTML file.
+  // ---------------------------------------------------------------------
+
+  function applyPortals(portals) {
+    if (!portals) return;
+    document.querySelectorAll('a[data-portal]').forEach(a => {
+      const url = portals[a.dataset.portal];
+      if (url) {
+        a.href = url;
+        a.classList.remove('pending');
+        a.removeAttribute('aria-disabled');
+        a.removeAttribute('title');
+        // Preserve the arrow icon, just fix the label text node
+        const icon = a.querySelector('svg');
+        a.textContent = 'Open portal ';
+        if (icon) a.appendChild(icon);
       }
-      requestAnimationFrame(tick);
-      counterObserver.unobserve(el);
     });
-  }, { threshold: 0.4 });
-  counters.forEach(c => counterObserver.observe(c));
+  }
+
+  function setupCounters(stats) {
+    if (stats) {
+      document.querySelectorAll('.stat-counter b[data-stat]').forEach(b => {
+        const val = stats[b.dataset.stat];
+        if (val !== undefined && val !== null && val !== '') b.dataset.target = val;
+      });
+    }
+    const counters = document.querySelectorAll('.stat-counter b');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10) || 0;
+        const suffix = el.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = Math.round(progress * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => counterObserver.observe(c));
+  }
+
+  function applyPrincipal(principal) {
+    if (!principal) return;
+    if (principal.name) {
+      document.getElementById('principalName').textContent = principal.name;
+      document.getElementById('principalSignature').textContent = principal.name;
+    }
+    if (principal.message) {
+      document.getElementById('principalMessage').textContent = '"' + principal.message + '"';
+    }
+    if (principal.photo) {
+      const frame = document.getElementById('principalPhotoFrame');
+      frame.innerHTML = `<img src="${principal.photo}" alt="Principal, Friends Vidyanikethan High School" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);">`;
+    }
+  }
+
+  function applyAdmissions(admissions) {
+    if (!admissions) return;
+    const map = { enquiryUrl: 'admEnquiryBtn', formUrl: 'admFormBtn', applyUrl: 'admApplyBtn' };
+    Object.entries(map).forEach(([key, id]) => {
+      const url = admissions[key];
+      if (url) {
+        const el = document.getElementById(id);
+        el.href = url;
+        el.classList.remove('pending');
+        el.removeAttribute('aria-disabled');
+        el.removeAttribute('title');
+      }
+    });
+  }
+
+  function applyContact(contact) {
+    if (contact && contact.officeHours) {
+      document.getElementById('officeHours').textContent = contact.officeHours;
+    }
+  }
+
+  function applyDownloads(downloads) {
+    if (!downloads) return;
+    document.querySelectorAll('a[data-download]').forEach(a => {
+      const url = downloads[a.dataset.download];
+      if (url) {
+        a.href = url;
+        a.classList.remove('pending');
+        a.removeAttribute('aria-disabled');
+        a.removeAttribute('title');
+        a.setAttribute('download', '');
+      }
+    });
+  }
+
+  function applyGallery(gallery) {
+    if (!gallery || gallery.length === 0) return;
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = gallery.map(g => `
+      <img src="${g.src}" alt="${g.alt || 'School photo'}" loading="lazy"
+           style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;">
+    `).join('');
+  }
+
+  function applyAchievements(achievements) {
+    if (!achievements) return;
+    document.querySelectorAll('[data-achv]').forEach(p => {
+      const text = achievements[p.dataset.achv];
+      if (text) p.textContent = text;
+    });
+  }
+
+  fetch('content.json', { cache: 'no-store' })
+    .then(res => { if (!res.ok) throw new Error('not found'); return res.json(); })
+    .then(data => {
+      applyPortals(data.portals);
+      applyPrincipal(data.principal);
+      applyAdmissions(data.admissions);
+      applyContact(data.contact);
+      applyDownloads(data.downloads);
+      applyGallery(data.gallery);
+      applyAchievements(data.achievements);
+      setupCounters(data.stats);
+    })
+    .catch(() => setupCounters(null));
 
   // Contact form — opens the user's email client with a prefilled message.
   // Replace with a real form backend (Formspree, Google Forms, etc.) when ready.

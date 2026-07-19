@@ -1,38 +1,73 @@
-# Friends Vidyanikethan High School — Portal Homepage
+# Friends Vidyanikethan High School — Website
 
-Static homepage linking the school's ERP, Payroll, Inventory, Digital Library and other applications. No backend — just HTML, CSS and JS, served as static files.
+Static site for the school — About, Academics, Admissions, Facilities,
+Gallery, Notices, Portals (ERP, Payroll, Inventory, Digital Library and
+more) and Contact, all in one page. No backend server — just HTML, CSS
+and JS served as static files, plus a small `/admin/` page that edits
+content through GitHub's API.
 
 ## Files
 
 ```
-index.html         The whole page (structure, styling and behaviour in one file)
-assets/logo.png     School logo, background removed
-notices.json        Notice board content — edit this, not the page, to post a notice
-PORTALS.md          Working notes on each portal's scope and access — fill in as you build
-.nojekyll            Tells GitHub Pages to skip Jekyll processing (leave this as is)
-CNAME.example        Notes for the custom domain step — see below
+index.html          The whole public site
+admin/index.html     Admin page — edit content.json and notices.json without touching code
+content.json         Editable content: portal links, stats, principal message, admissions
+                      buttons, downloads, gallery, achievements, office hours
+notices.json         Notice board entries
+assets/logo.png      School logo, background removed
+assets/gallery/       Gallery photos land here when added via the admin page
+assets/downloads/     Downloadable files land here when added via the admin page
+PORTALS.md           Working notes on each portal's scope and access — fill in as you build
+.nojekyll             Tells GitHub Pages to skip Jekyll processing (leave this as is)
+CNAME.example         Notes for the custom domain step — see below
 ```
 
-## Posting a notice (no code required)
+## Editing content — two ways
 
-Open `notices.json` on GitHub (click the file → pencil icon to edit) and add a block like:
+### The admin page (no code, no raw JSON)
 
-```json
-{
-  "date": "2026-08-01",
-  "title": "School reopens for Term 2 on 1 August.",
-  "tag": "General"
-}
-```
+Open `admin/index.html` in a browser once the site is live — e.g.
+`https://friendsvidyanikethanschool-git.github.io/school-home/admin/`.
 
-Add a comma after the previous block, save/commit, and it appears on the homepage automatically — nothing in `index.html` needs to change. Notices are sorted newest-first by the `date` field automatically.
+1. Enter the GitHub org, repo name, branch (`main`), and a **Personal
+   access token** with write access to this repo. The page tells you
+   exactly how to create one and what permission it needs.
+2. Click **Connect & load** — every editable section fills in with the
+   current content.
+3. Edit a section and click its **Save** button. That section commits
+   straight to the repo; GitHub Pages rebuilds automatically (usually
+   under a minute).
 
-If whoever posts notices shouldn't need a GitHub account at all, a Google Sheet published as JSON is a reasonable alternative — happy to wire that up instead if it'd suit your office staff better.
+From the admin page you can:
+- Add, edit or remove notices
+- Set the URL for each portal card (ERP, Digital Library, Learning
+  Portal, Parent Portal, Staff Webmail — Payroll and Inventory are
+  already set)
+- Set the four homepage statistics
+- Set the Principal's name, message and photo
+- Set the three Admissions buttons (enquiry link, form upload, apply link)
+- Upload files for the six Downloads items
+- Add or remove Gallery photos
+- Edit the five Achievements descriptions
+- Set office hours
+
+The token is only kept in that browser tab and is never saved anywhere
+— close the tab and it's gone, so you'll enter it again next time. If
+you're on a shared computer, revoke the token on GitHub when you're done.
+
+### Editing the JSON files directly
+
+Everything the admin page writes lives in two plain files,
+`content.json` and `notices.json`. You can also open either on GitHub
+(click the file → pencil icon) and edit it by hand if you'd rather —
+the admin page is just a friendlier way to do the same thing. Neither
+approach ever touches `index.html`.
 
 ## 1. Put this on GitHub
 
 1. Create a new repo in the `friendsvidyanikethanschool-git` org — e.g. `school-home`.
-2. Upload every file in this folder, **keeping `assets/logo.png` inside an `assets` folder** (the page links to `assets/logo.png`, so the folder structure has to match).
+2. Upload every file in this folder, keeping the folder structure intact
+   (`assets/`, `admin/`, and the JSON files at the root, alongside `index.html`).
 3. Commit to the `main` branch.
 
 ## 2. Turn on GitHub Pages
@@ -44,11 +79,14 @@ If whoever posts notices shouldn't need a GitHub account at all, a Google Sheet 
    `https://friendsvidyanikethanschool-git.github.io/school-home/`
    It can take a minute or two to go live the first time.
 
-## 3. Fill in the placeholder links
+## 3. Fill in what's still placeholder
 
-Search `index.html` for `href="#"` — each marks a portal card that isn't wired up yet (ERP, Digital Library, Learning Portal, Parent Portal, Staff Webmail). Replace `#` with the real URL as each system goes live. Payroll and Inventory are already wired to their GitHub Pages URLs.
-
-Also replace the placeholder address, phone number and email in the footer.
+Use the admin page (above) for portal links, stats, principal message,
+admissions buttons, downloads, gallery and achievements. A few things
+are still fixed in `index.html` itself and need a direct edit if they
+change: the school's address/phone/email in the footer and Contact
+section, the classes offered, and the board affiliation/school timings
+in Academics.
 
 ## 4. Once you buy the domain
 

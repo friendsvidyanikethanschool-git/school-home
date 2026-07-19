@@ -20,5 +20,5 @@ For each portal, three questions matter:
 ## Notes
 
 - The homepage toggle (Everyone / I'm Staff / I'm Parent-Student) only controls what's **shown** on the homepage — it is not real access control. Actual login and permissions have to live inside each portal itself.
-- When a placeholder goes live: open `index.html`, find the matching `<!-- TODO -->` comment, and replace the `javascript:void(0)` link with the real URL (same pattern already used for Payroll and Inventory).
-- If a portal's audience changes, update its card's `data-audience="..."` attribute (`all`, `staff`, or `parent-student`).
+- When a placeholder goes live: open `admin/index.html`, connect, and paste the URL into the matching field under **Portal links** — no code edit needed.
+- If a portal's audience should change (e.g. a currently staff-only portal should also show for parents), that's a code-level change to the card's `data-audience` attribute in `index.html` — ask your developer.
