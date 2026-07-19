@@ -1,0 +1,46 @@
+{
+  "portals": {
+    "erp": "",
+    "library": "",
+    "learning": "",
+    "payroll": "https://friendsvidyanikethanschool-git.github.io/Friends-School-Payroll/",
+    "inventory": "https://friendsvidyanikethanschool-git.github.io/campus-stock/",
+    "parent": "",
+    "webmail": ""
+  },
+  "stats": {
+    "years": 0,
+    "students": 0,
+    "teachers": 0,
+    "books": 0
+  },
+  "principal": {
+    "name": "",
+    "message": "",
+    "photo": ""
+  },
+  "admissions": {
+    "enquiryUrl": "",
+    "formUrl": "",
+    "applyUrl": ""
+  },
+  "contact": {
+    "officeHours": ""
+  },
+  "downloads": {
+    "admission-form": "",
+    "holiday-list": "",
+    "academic-calendar": "",
+    "book-list": "",
+    "uniform-guidelines": "",
+    "transfer-certificate": ""
+  },
+  "gallery": [],
+  "achievements": {
+    "excellence": "",
+    "sports": "",
+    "olympiads": "",
+    "competitions": "",
+    "sciencefair": ""
+  }
+}
